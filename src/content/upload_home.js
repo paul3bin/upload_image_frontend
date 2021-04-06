@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 function Home(props) {
-  const [currentComponent, setCurrentComponent] = useState();
   const history = useHistory();
   const submitClicked = () => {
     history.push("/landing");
