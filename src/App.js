@@ -9,6 +9,8 @@ import { UploadLanding } from "./content/upload_landing";
 import { SignIn } from "./content/sign_in";
 import { SignUp } from "./content/sign_up";
 
+import { ProtectedRoute } from "./ProtectedRoute";
+
 function App() {
   return (
     <Router>
@@ -17,9 +19,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/landing">
-          <UploadLanding />
-        </Route>
+        <ProtectedRoute exact path="/landing" component={UploadLanding} />
         <Route exact path="/login">
           <SignIn />
         </Route>

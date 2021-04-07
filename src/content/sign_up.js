@@ -1,17 +1,38 @@
 import React, { useState } from "react";
+import { API } from "../api_service";
+import { useHistory } from "react-router-dom";
+
+import { toast, ToastContainer } from "react-toastify";
 
 function SignUp() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const history = useHistory();
+
+  const registerUser = () => {
+    if (password !== password2) {
+      toast.error("Passwords do not match!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      API.registerUser({
+        username: userName,
+        password: password,
+      }).then((resp) => console.log(resp));
+      history.push("/login");
+    }
+  };
+
   return (
     <div className="App-body">
-      <div class="card border-dark mb-3">
-        <div class="card-header">Sign-Up</div>
+      <ToastContainer />
+      <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Sign Up</div>
         <div class="card-body text-dark">
           <div className="container">
-            <div className="col">
-              <div className="row">
+            <div className="d-grid gap-2">
+              <div className="p-2">
                 <div className="form-floating">
                   <input
                     type="text"
@@ -20,13 +41,13 @@ function SignUp() {
                     placeholder="UserName"
                     onChange={(ev) => setUserName(ev.target.value)}
                   />
-                  <label for="floatingInput">UserName</label>
+                  <label for="floatingInput">Username</label>
                 </div>
               </div>
-              <div className="row">
+              <div className="p-2">
                 <div className="form-floating">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="floatingInput"
                     placeholder="Password"
@@ -35,10 +56,10 @@ function SignUp() {
                   <label for="floatingInput">Password</label>
                 </div>
               </div>
-              <div className="row">
+              <div className="p-2">
                 <div className="form-floating">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="floatingInput"
                     placeholder="Re-Enter Password"
@@ -47,14 +68,14 @@ function SignUp() {
                   <label for="floatingInput">Re-Enter Password</label>
                 </div>
               </div>
-              <div className="row">
+              <div className="p-2">
                 <div className="form-floating">
                   <button
                     type="button"
                     className="btn btn-primary btn-lg"
-                    // onClick={getResult}
+                    onClick={registerUser}
                   >
-                    Login
+                    Register
                   </button>
                 </div>
               </div>

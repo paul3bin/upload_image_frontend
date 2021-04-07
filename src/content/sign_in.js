@@ -1,16 +1,29 @@
 import React, { useState } from "react";
+import { API } from "../api_service";
+import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 
 function SignIn() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useCookies(["token"]);
+  const history = useHistory();
+
+  const loginUser = () => {
+    API.loginUser({ username: userName, password: password }).then((resp) =>
+      setToken("token", resp.token)
+    );
+    history.push("/");
+  };
+
   return (
     <div className="App-body">
-      <div class="card border-dark mb-3">
-        <div class="card-header">Sign-In</div>
-        <div class="card-body text-dark">
+      <div class="card text-white bg-dark mb-3">
+        <div className="card-header">Sign In</div>
+        <div className="card-body text-dark">
           <div className="container">
-            <div className="col">
-              <div className="row">
+            <div className="d-grid gap-2">
+              <div className="p-2">
                 <div className="form-floating">
                   <input
                     type="text"
@@ -19,13 +32,13 @@ function SignIn() {
                     placeholder="UserName"
                     onChange={(ev) => setUserName(ev.target.value)}
                   />
-                  <label for="floatingInput">UserName</label>
+                  <label for="floatingInput">Username</label>
                 </div>
               </div>
-              <div className="row">
+              <div className="p-2">
                 <div className="form-floating">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="floatingInput"
                     placeholder="Password"
@@ -34,12 +47,12 @@ function SignIn() {
                   <label for="floatingInput">Password</label>
                 </div>
               </div>
-              <div className="row">
+              <div className="p-2">
                 <div className="form-floating">
                   <button
                     type="button"
                     className="btn btn-primary btn-lg"
-                    // onClick={getResult}
+                    onClick={loginUser}
                   >
                     Login
                   </button>
