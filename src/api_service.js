@@ -1,6 +1,6 @@
 export class API {
   static loginUser(body) {
-    return fetch(`http://127.0.0.1:5000/login`, {
+    return fetch(`https://upload-image-backend-flask-api.herokuapp.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -10,12 +10,15 @@ export class API {
   }
 
   static registerUser(body) {
-    return fetch(`http://127.0.0.1:5000/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }).then((resp) => resp.json());
+    return fetch(
+      `https://upload-image-backend-flask-api.herokuapp.com/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    ).then((resp) => resp.json());
   }
 }
