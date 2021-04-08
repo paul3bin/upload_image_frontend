@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 
 function SignIn() {
+  document.title = "Sign In";
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useCookies(["token"]);

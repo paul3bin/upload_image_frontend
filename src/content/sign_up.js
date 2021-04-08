@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 function SignUp() {
+  document.title = "Sign Up";
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");

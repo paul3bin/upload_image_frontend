@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 function UploadLanding(props) {
+  document.title = "Landing";
   const history = useHistory();
   const [fileName, setFileName, deleteFileName] = useCookies(["filename"]);
 

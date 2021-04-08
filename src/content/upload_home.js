@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
+  document.title = "Home";
   const [selectedFile, setSelectedFile] = useState();
   const [fileName, setFileName] = useCookies(["filename"]);
   const [token] = useCookies(["token"]);
@@ -13,7 +14,7 @@ function Home() {
   const history = useHistory();
   const submitClicked = () => {
     if (!token["token"] === true) {
-      toast.error("Login and try again!", {
+      toast.error("Login to upload file!", {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
